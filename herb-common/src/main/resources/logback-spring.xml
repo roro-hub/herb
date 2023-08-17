@@ -186,7 +186,7 @@
         <appender-ref ref="LOG_STASH_ERROR"/>
     </root>
 
-    <logger name="com.herb.mbg.log.WebLogAspect" level="DEBUG">
+    <logger name="com.herb.common.logger.WebLogAspect" level="DEBUG">
         <appender-ref ref="LOG_STASH_RECORD"/>
     </logger>
 

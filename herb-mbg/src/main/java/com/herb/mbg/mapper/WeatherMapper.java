@@ -27,4 +27,9 @@ public interface WeatherMapper {
     int updateByPrimaryKeySelective(Weather record);
 
     int updateByPrimaryKey(Weather record);
+
+    /**
+     * 获取最新的天气信息
+     */
+    Weather getLately();
 }

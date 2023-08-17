@@ -19,6 +19,9 @@ public class User implements Serializable {
     @ApiModelProperty(value = "头像")
     private String icon;
 
+    @ApiModelProperty(value = "帐号启用状态：0->禁用；1->启用")
+    private Integer status;
+
     @ApiModelProperty(value = "邮箱")
     private String email;
 
@@ -27,9 +30,6 @@ public class User implements Serializable {
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
-
-    @ApiModelProperty(value = "帐号启用状态：0->禁用；1->启用")
-    private Integer status;
 
     private static final long serialVersionUID = 1L;
 
@@ -73,6 +73,14 @@ public class User implements Serializable {
         this.icon = icon;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -97,14 +105,6 @@ public class User implements Serializable {
         this.createTime = createTime;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -116,10 +116,10 @@ public class User implements Serializable {
         sb.append(", userName=").append(userName);
         sb.append(", password=").append(password);
         sb.append(", icon=").append(icon);
+        sb.append(", status=").append(status);
         sb.append(", email=").append(email);
         sb.append(", remark=").append(remark);
         sb.append(", createTime=").append(createTime);
-        sb.append(", status=").append(status);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

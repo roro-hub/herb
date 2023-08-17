@@ -17,7 +17,7 @@ public class Herb implements Serializable {
     private String images;
 
     @ApiModelProperty(value = "描述")
-    private String desc;
+    private String content;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
@@ -59,12 +59,12 @@ public class Herb implements Serializable {
         this.images = images;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getContent() {
+        return content;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Date getCreateTime() {
@@ -93,7 +93,7 @@ public class Herb implements Serializable {
         sb.append(", name=").append(name);
         sb.append(", herbType=").append(herbType);
         sb.append(", images=").append(images);
-        sb.append(", desc=").append(desc);
+        sb.append(", content=").append(content);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

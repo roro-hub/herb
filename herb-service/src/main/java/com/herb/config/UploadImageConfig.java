@@ -1,7 +1,7 @@
 package com.herb.config;
 
-import com.herb.mbg.api.CommonResult;
-import com.herb.mbg.util.UploadFileUtils;
+import com.herb.common.api.CommonResult;
+import com.herb.common.util.UploadFileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -9,8 +9,8 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>mbg</name>
-    <description>mbg project for mall</description>
+    <name>herb-mbg</name>
+    <description>mbg project for herb</description>
 
     <parent>
         <groupId>com.herb</groupId>

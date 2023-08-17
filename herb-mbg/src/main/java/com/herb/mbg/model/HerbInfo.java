@@ -17,7 +17,7 @@ public class HerbInfo implements Serializable {
     private String images;
 
     @ApiModelProperty(value = "描述")
-    private String desc;
+    private String content;
 
     @ApiModelProperty(value = "视频")
     private String video;
@@ -62,12 +62,12 @@ public class HerbInfo implements Serializable {
         this.images = images;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getContent() {
+        return content;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getVideo() {
@@ -104,7 +104,7 @@ public class HerbInfo implements Serializable {
         sb.append(", herbId=").append(herbId);
         sb.append(", type=").append(type);
         sb.append(", images=").append(images);
-        sb.append(", desc=").append(desc);
+        sb.append(", content=").append(content);
         sb.append(", video=").append(video);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);

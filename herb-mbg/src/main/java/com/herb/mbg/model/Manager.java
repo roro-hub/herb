@@ -16,14 +16,14 @@ public class Manager implements Serializable {
     @ApiModelProperty(value = "邮箱")
     private String email;
 
+    @ApiModelProperty(value = "用户启用状态：0->禁用；1->启用")
+    private Integer status;
+
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
     @ApiModelProperty(value = "更新时间")
     private Date updateTime;
-
-    @ApiModelProperty(value = "用户启用状态：0->禁用；1->启用")
-    private Integer status;
 
     private static final long serialVersionUID = 1L;
 
@@ -59,6 +59,14 @@ public class Manager implements Serializable {
         this.email = email;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -75,14 +83,6 @@ public class Manager implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -93,9 +93,9 @@ public class Manager implements Serializable {
         sb.append(", name=").append(name);
         sb.append(", phone=").append(phone);
         sb.append(", email=").append(email);
+        sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
-        sb.append(", status=").append(status);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

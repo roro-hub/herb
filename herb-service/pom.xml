@@ -7,8 +7,8 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>admin</name>
-    <description>admin project for mall</description>
+    <name>herb-service</name>
+    <description>mbg project for herb</description>
 
     <parent>
         <groupId>com.herb</groupId>

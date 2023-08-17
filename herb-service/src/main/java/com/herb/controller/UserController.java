@@ -1,6 +1,6 @@
 package com.herb.controller;
 
-import com.herb.mbg.api.CommonResult;
+import com.herb.common.api.CommonResult;
 import com.herb.bo.LoginBO;
 import com.herb.mbg.model.User;
 import com.herb.service.UserService;
