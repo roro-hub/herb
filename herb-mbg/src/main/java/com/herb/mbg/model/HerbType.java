@@ -10,12 +10,6 @@ public class HerbType implements Serializable {
     @ApiModelProperty(value = "名称")
     private String name;
 
-    @ApiModelProperty(value = "图片")
-    private String images;
-
-    @ApiModelProperty(value = "描述")
-    private String content;
-
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
@@ -38,22 +32,6 @@ public class HerbType implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getImages() {
-        return images;
-    }
-
-    public void setImages(String images) {
-        this.images = images;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public Date getCreateTime() {
@@ -80,8 +58,6 @@ public class HerbType implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", images=").append(images);
-        sb.append(", content=").append(content);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

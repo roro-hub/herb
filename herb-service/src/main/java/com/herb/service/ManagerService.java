@@ -10,5 +10,7 @@ public interface ManagerService {
 
     void update(Manager bo);
 
+    void delete(Long id);
+
     List<Manager> list(String name, Integer pageSize, Integer pageNum);
 }

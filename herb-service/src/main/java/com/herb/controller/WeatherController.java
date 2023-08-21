@@ -5,7 +5,6 @@ import com.herb.mbg.model.Weather;
 import com.herb.service.WeatherService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,15 +25,6 @@ public class WeatherController {
     @GetMapping
     @ResponseBody
     public CommonResult<Weather> get() {
-        Weather weather = weatherService.getLately();
-        return CommonResult.success(weather);
-    }
-
-    /**
-     * 每五分钟执行一次
-     */
-    @Scheduled(cron = "0 5 * * * ?")
-    public void record() {
-        weatherService.record();
+        return CommonResult.success();
     }
 }

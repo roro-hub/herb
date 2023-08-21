@@ -10,6 +10,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@MapperScan({"com.herb.mbg.mapper"})
+@MapperScan({"com.herb.mbg.mapper", "com.herb.dao"})
 public class MyBatisConfig {
 }

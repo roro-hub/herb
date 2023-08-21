@@ -1,6 +1,5 @@
 package com.herb.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import com.herb.mbg.mapper.InfoMapper;
 import com.herb.mbg.model.Info;
 import com.herb.mbg.model.InfoExample;
@@ -27,10 +26,16 @@ public class InfoServiceImpl implements InfoService {
     }
 
     @Override
-    public List<Info> list(String type, Integer pageSize, Integer pageNum) {
-        PageHelper.startPage(pageNum, pageSize);
+    public void delete(Long id) {
+        infoMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public Info get(String type) {
         InfoExample infoExample = new InfoExample();
         infoExample.createCriteria().andTypeEqualTo(type);
-        return infoMapper.selectByExample(infoExample);
+        List<Info> infos = infoMapper.selectByExample(infoExample);
+        return infos.size() > 0 ? infos.get(0) : null;
     }
+
 }

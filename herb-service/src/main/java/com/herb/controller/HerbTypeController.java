@@ -40,6 +40,14 @@ public class HerbTypeController {
         return CommonResult.success();
     }
 
+    @ApiOperation("删除")
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    public CommonResult<Void> delete(@PathVariable Long id) {
+        herbTypeService.delete(id);
+        return CommonResult.success();
+    }
+
     @ApiOperation("分页列表查询")
     @PostMapping("/list")
     @ResponseBody

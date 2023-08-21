@@ -13,6 +13,7 @@
         <module>herb-common</module>
         <module>herb-mbg</module>
         <module>herb-service</module>
+        <module>herb-security</module>
     </modules>
 
     <parent>

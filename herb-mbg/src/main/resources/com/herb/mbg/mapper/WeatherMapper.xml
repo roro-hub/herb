@@ -271,9 +271,4 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-
-  <select id="getLately" resultType="com.herb.mbg.model.Weather">
-    select * from weather
-    order by record_time desc
-  </select>
 </mapper>

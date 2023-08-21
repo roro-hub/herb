@@ -27,6 +27,11 @@ public class HerbTypeServiceImpl implements HerbTypeService {
     }
 
     @Override
+    public void delete(Long id) {
+        herbTypeMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
     public List<HerbType> list(String name, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         HerbTypeExample herbTypeExample = new HerbTypeExample();

@@ -10,5 +10,8 @@ public interface HerbService {
 
     void update(Herb herb);
 
+    void delete(Long id);
+
     List<Herb> list(String name, Integer pageSize, Integer pageNum);
+
 }

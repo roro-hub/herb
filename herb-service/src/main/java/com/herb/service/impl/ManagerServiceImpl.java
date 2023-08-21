@@ -27,6 +27,11 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    public void delete(Long id) {
+        managerMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
     public List<Manager> list(String name, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         ManagerExample managerExample = new ManagerExample();
