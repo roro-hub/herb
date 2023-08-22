@@ -38,4 +38,12 @@ public class InfoServiceImpl implements InfoService {
         return infos.size() > 0 ? infos.get(0) : null;
     }
 
+    @Override
+    public List<Info> list(List<String> types) {
+        InfoExample infoExample = new InfoExample();
+        infoExample.createCriteria().andTypeIn(types);
+        List<Info> infos = infoMapper.selectByExample(infoExample);
+        return infos;
+    }
+
 }

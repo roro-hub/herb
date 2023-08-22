@@ -3,6 +3,7 @@
 <mapper namespace="com.herb.mbg.mapper.InfoMapper">
   <resultMap id="BaseResultMap" type="com.herb.mbg.model.Info">
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="images" jdbcType="VARCHAR" property="images" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, type, content, images, create_time, update_time
+    id, name, type, content, images, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.herb.mbg.model.InfoExample" resultMap="BaseResultMap">
     select
@@ -104,10 +105,12 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into info (type, content, images, 
-      create_time, update_time)
-    values (#{type,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    insert into info (name, type, content, 
+      images, create_time, update_time
+      )
+    values (#{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{images,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.herb.mbg.model.Info">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -115,6 +118,9 @@
     </selectKey>
     insert into info
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
       <if test="type != null">
         type,
       </if>
@@ -132,6 +138,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
       </if>
@@ -161,6 +170,9 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=VARCHAR},
       </if>
@@ -184,6 +196,7 @@
   <update id="updateByExample" parameterType="map">
     update info
     set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=VARCHAR},
       images = #{record.images,jdbcType=VARCHAR},
@@ -196,6 +209,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.herb.mbg.model.Info">
     update info
     <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
       <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
       </if>
@@ -216,7 +232,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.herb.mbg.model.Info">
     update info
-    set type = #{type,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       images = #{images,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

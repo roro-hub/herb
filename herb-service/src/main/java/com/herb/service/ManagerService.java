@@ -12,5 +12,7 @@ public interface ManagerService {
 
     void delete(Long id);
 
+    Manager get(Long id);
+
     List<Manager> list(String name, Integer pageSize, Integer pageNum);
 }

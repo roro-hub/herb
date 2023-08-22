@@ -5,6 +5,7 @@ import com.herb.mbg.mapper.ManagerMapper;
 import com.herb.mbg.model.Manager;
 import com.herb.mbg.model.ManagerExample;
 import com.herb.service.ManagerService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -32,10 +33,17 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    public Manager get(Long id) {
+        return managerMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public List<Manager> list(String name, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         ManagerExample managerExample = new ManagerExample();
-        managerExample.createCriteria().andNameLike(name);
+        if (StringUtils.isNotBlank(name)) {
+            managerExample.createCriteria().andNameLike(name);
+        }
         return managerMapper.selectByExample(managerExample);
     }
 }

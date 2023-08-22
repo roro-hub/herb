@@ -54,8 +54,7 @@ secure:
       - /admin/info
       - /admin/logout
       - /minio/upload
-      - /herb/**
-      - /herbType/**
+      - /**/**
 
 aliyun:
   oss:

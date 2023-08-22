@@ -7,6 +7,9 @@ import java.util.Date;
 public class Info implements Serializable {
     private Long id;
 
+    @ApiModelProperty(value = "名称")
+    private String name;
+
     @ApiModelProperty(value = "类型")
     private String type;
 
@@ -30,6 +33,14 @@ public class Info implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getType() {
@@ -79,6 +90,7 @@ public class Info implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", name=").append(name);
         sb.append(", type=").append(type);
         sb.append(", content=").append(content);
         sb.append(", images=").append(images);
