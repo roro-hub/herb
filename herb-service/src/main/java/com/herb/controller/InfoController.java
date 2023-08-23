@@ -47,7 +47,7 @@ public class InfoController {
     }
 
     @ApiOperation("分页列表查询")
-    @GetMapping("/get/{type}")
+    @GetMapping("/{type}")
     @ResponseBody
     public CommonResult<Info> get(@PathVariable(value = "type") String type) {
         Info info = infoService.get(type);
