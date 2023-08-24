@@ -1,14 +1,11 @@
 package com.herb.service;
 
+import com.herb.bo.PriceChartBO;
 import com.herb.mbg.model.Price;
 
 public interface PriceService {
 
-    void add(Price price);
+    Price today(Price price);
 
-    void update(Price price);
-
-    void delete(Long id);
-
-    void save();
+    PriceChartBO chart(Price price);
 }

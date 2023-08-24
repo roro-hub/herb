@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Price implements Serializable {
+public class PriceRanking implements Serializable {
     private Long id;
 
     @ApiModelProperty(value = "药材名称")
@@ -17,29 +17,17 @@ public class Price implements Serializable {
     @ApiModelProperty(value = "产地")
     private String origin;
 
-    @ApiModelProperty(value = "市场，亳州/安国/成都/玉林/廉桥/普宁")
-    private String site;
-
-    @ApiModelProperty(value = "单位，元/千克")
-    private String measureunit;
-
     @ApiModelProperty(value = "价格")
     private BigDecimal newprice;
-
-    @ApiModelProperty(value = "较上周价格")
-    private BigDecimal wprice;
 
     @ApiModelProperty(value = "较上周价格比例")
     private BigDecimal wpricefloat;
 
-    @ApiModelProperty(value = "较上月价格")
-    private BigDecimal yprice;
-
     @ApiModelProperty(value = "较上月价格比例")
     private BigDecimal ypricefloat;
 
-    @ApiModelProperty(value = "较去年价格")
-    private BigDecimal nprice;
+    @ApiModelProperty(value = "较上季价格比例")
+    private BigDecimal jpricefloat;
 
     @ApiModelProperty(value = "较去年价格比例")
     private BigDecimal npricefloat;
@@ -87,36 +75,12 @@ public class Price implements Serializable {
         this.origin = origin;
     }
 
-    public String getSite() {
-        return site;
-    }
-
-    public void setSite(String site) {
-        this.site = site;
-    }
-
-    public String getMeasureunit() {
-        return measureunit;
-    }
-
-    public void setMeasureunit(String measureunit) {
-        this.measureunit = measureunit;
-    }
-
     public BigDecimal getNewprice() {
         return newprice;
     }
 
     public void setNewprice(BigDecimal newprice) {
         this.newprice = newprice;
-    }
-
-    public BigDecimal getWprice() {
-        return wprice;
-    }
-
-    public void setWprice(BigDecimal wprice) {
-        this.wprice = wprice;
     }
 
     public BigDecimal getWpricefloat() {
@@ -127,14 +91,6 @@ public class Price implements Serializable {
         this.wpricefloat = wpricefloat;
     }
 
-    public BigDecimal getYprice() {
-        return yprice;
-    }
-
-    public void setYprice(BigDecimal yprice) {
-        this.yprice = yprice;
-    }
-
     public BigDecimal getYpricefloat() {
         return ypricefloat;
     }
@@ -143,12 +99,12 @@ public class Price implements Serializable {
         this.ypricefloat = ypricefloat;
     }
 
-    public BigDecimal getNprice() {
-        return nprice;
+    public BigDecimal getJpricefloat() {
+        return jpricefloat;
     }
 
-    public void setNprice(BigDecimal nprice) {
-        this.nprice = nprice;
+    public void setJpricefloat(BigDecimal jpricefloat) {
+        this.jpricefloat = jpricefloat;
     }
 
     public BigDecimal getNpricefloat() {
@@ -193,14 +149,10 @@ public class Price implements Serializable {
         sb.append(", name=").append(name);
         sb.append(", standard=").append(standard);
         sb.append(", origin=").append(origin);
-        sb.append(", site=").append(site);
-        sb.append(", measureunit=").append(measureunit);
         sb.append(", newprice=").append(newprice);
-        sb.append(", wprice=").append(wprice);
         sb.append(", wpricefloat=").append(wpricefloat);
-        sb.append(", yprice=").append(yprice);
         sb.append(", ypricefloat=").append(ypricefloat);
-        sb.append(", nprice=").append(nprice);
+        sb.append(", jpricefloat=").append(jpricefloat);
         sb.append(", npricefloat=").append(npricefloat);
         sb.append(", newdate=").append(newdate);
         sb.append(", createTime=").append(createTime);

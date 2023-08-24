@@ -3,8 +3,8 @@ package com.herb.common.constant;
 public enum TypeEnum {
 
     SERVE_LIST("serve_list", "服务清单"),
-    MARKET_INTRODUCTION("market_introduction", "市场介绍"),
-    HERB_INTRODUCTION("herb_introduction", "草堂介绍"),
+    market("market", "市场介绍"),
+    cottage_INTRODUCTION("cottage", "草堂介绍"),
     SOIL("soil", "土壤");
 
     private String code;

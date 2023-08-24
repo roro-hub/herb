@@ -6,14 +6,14 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class PriceExample {
+public class PriceRankingExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public PriceExample() {
+    public PriceRankingExample() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -403,146 +403,6 @@ public class PriceExample {
             return (Criteria) this;
         }
 
-        public Criteria andSiteIsNull() {
-            addCriterion("site is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSiteIsNotNull() {
-            addCriterion("site is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSiteEqualTo(String value) {
-            addCriterion("site =", value, "site");
-            return (Criteria) this;
-        }
-
-        public Criteria andSiteNotEqualTo(String value) {
-            addCriterion("site <>", value, "site");
-            return (Criteria) this;
-        }
-
-        public Criteria andSiteGreaterThan(String value) {
-            addCriterion("site >", value, "site");
-            return (Criteria) this;
-        }
-
-        public Criteria andSiteGreaterThanOrEqualTo(String value) {
-            addCriterion("site >=", value, "site");
-            return (Criteria) this;
-        }
-
-        public Criteria andSiteLessThan(String value) {
-            addCriterion("site <", value, "site");
-            return (Criteria) this;
-        }
-
-        public Criteria andSiteLessThanOrEqualTo(String value) {
-            addCriterion("site <=", value, "site");
-            return (Criteria) this;
-        }
-
-        public Criteria andSiteLike(String value) {
-            addCriterion("site like", value, "site");
-            return (Criteria) this;
-        }
-
-        public Criteria andSiteNotLike(String value) {
-            addCriterion("site not like", value, "site");
-            return (Criteria) this;
-        }
-
-        public Criteria andSiteIn(List<String> values) {
-            addCriterion("site in", values, "site");
-            return (Criteria) this;
-        }
-
-        public Criteria andSiteNotIn(List<String> values) {
-            addCriterion("site not in", values, "site");
-            return (Criteria) this;
-        }
-
-        public Criteria andSiteBetween(String value1, String value2) {
-            addCriterion("site between", value1, value2, "site");
-            return (Criteria) this;
-        }
-
-        public Criteria andSiteNotBetween(String value1, String value2) {
-            addCriterion("site not between", value1, value2, "site");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeasureunitIsNull() {
-            addCriterion("measureunit is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeasureunitIsNotNull() {
-            addCriterion("measureunit is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeasureunitEqualTo(String value) {
-            addCriterion("measureunit =", value, "measureunit");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeasureunitNotEqualTo(String value) {
-            addCriterion("measureunit <>", value, "measureunit");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeasureunitGreaterThan(String value) {
-            addCriterion("measureunit >", value, "measureunit");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeasureunitGreaterThanOrEqualTo(String value) {
-            addCriterion("measureunit >=", value, "measureunit");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeasureunitLessThan(String value) {
-            addCriterion("measureunit <", value, "measureunit");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeasureunitLessThanOrEqualTo(String value) {
-            addCriterion("measureunit <=", value, "measureunit");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeasureunitLike(String value) {
-            addCriterion("measureunit like", value, "measureunit");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeasureunitNotLike(String value) {
-            addCriterion("measureunit not like", value, "measureunit");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeasureunitIn(List<String> values) {
-            addCriterion("measureunit in", values, "measureunit");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeasureunitNotIn(List<String> values) {
-            addCriterion("measureunit not in", values, "measureunit");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeasureunitBetween(String value1, String value2) {
-            addCriterion("measureunit between", value1, value2, "measureunit");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeasureunitNotBetween(String value1, String value2) {
-            addCriterion("measureunit not between", value1, value2, "measureunit");
-            return (Criteria) this;
-        }
-
         public Criteria andNewpriceIsNull() {
             addCriterion("newprice is null");
             return (Criteria) this;
@@ -600,66 +460,6 @@ public class PriceExample {
 
         public Criteria andNewpriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("newprice not between", value1, value2, "newprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andWpriceIsNull() {
-            addCriterion("wprice is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andWpriceIsNotNull() {
-            addCriterion("wprice is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andWpriceEqualTo(BigDecimal value) {
-            addCriterion("wprice =", value, "wprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andWpriceNotEqualTo(BigDecimal value) {
-            addCriterion("wprice <>", value, "wprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andWpriceGreaterThan(BigDecimal value) {
-            addCriterion("wprice >", value, "wprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andWpriceGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("wprice >=", value, "wprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andWpriceLessThan(BigDecimal value) {
-            addCriterion("wprice <", value, "wprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andWpriceLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("wprice <=", value, "wprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andWpriceIn(List<BigDecimal> values) {
-            addCriterion("wprice in", values, "wprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andWpriceNotIn(List<BigDecimal> values) {
-            addCriterion("wprice not in", values, "wprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andWpriceBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("wprice between", value1, value2, "wprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andWpriceNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("wprice not between", value1, value2, "wprice");
             return (Criteria) this;
         }
 
@@ -723,66 +523,6 @@ public class PriceExample {
             return (Criteria) this;
         }
 
-        public Criteria andYpriceIsNull() {
-            addCriterion("yprice is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andYpriceIsNotNull() {
-            addCriterion("yprice is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andYpriceEqualTo(BigDecimal value) {
-            addCriterion("yprice =", value, "yprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYpriceNotEqualTo(BigDecimal value) {
-            addCriterion("yprice <>", value, "yprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYpriceGreaterThan(BigDecimal value) {
-            addCriterion("yprice >", value, "yprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYpriceGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("yprice >=", value, "yprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYpriceLessThan(BigDecimal value) {
-            addCriterion("yprice <", value, "yprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYpriceLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("yprice <=", value, "yprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYpriceIn(List<BigDecimal> values) {
-            addCriterion("yprice in", values, "yprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYpriceNotIn(List<BigDecimal> values) {
-            addCriterion("yprice not in", values, "yprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYpriceBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("yprice between", value1, value2, "yprice");
-            return (Criteria) this;
-        }
-
-        public Criteria andYpriceNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("yprice not between", value1, value2, "yprice");
-            return (Criteria) this;
-        }
-
         public Criteria andYpricefloatIsNull() {
             addCriterion("ypricefloat is null");
             return (Criteria) this;
@@ -843,63 +583,63 @@ public class PriceExample {
             return (Criteria) this;
         }
 
-        public Criteria andNpriceIsNull() {
-            addCriterion("nprice is null");
+        public Criteria andJpricefloatIsNull() {
+            addCriterion("jpricefloat is null");
             return (Criteria) this;
         }
 
-        public Criteria andNpriceIsNotNull() {
-            addCriterion("nprice is not null");
+        public Criteria andJpricefloatIsNotNull() {
+            addCriterion("jpricefloat is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNpriceEqualTo(BigDecimal value) {
-            addCriterion("nprice =", value, "nprice");
+        public Criteria andJpricefloatEqualTo(BigDecimal value) {
+            addCriterion("jpricefloat =", value, "jpricefloat");
             return (Criteria) this;
         }
 
-        public Criteria andNpriceNotEqualTo(BigDecimal value) {
-            addCriterion("nprice <>", value, "nprice");
+        public Criteria andJpricefloatNotEqualTo(BigDecimal value) {
+            addCriterion("jpricefloat <>", value, "jpricefloat");
             return (Criteria) this;
         }
 
-        public Criteria andNpriceGreaterThan(BigDecimal value) {
-            addCriterion("nprice >", value, "nprice");
+        public Criteria andJpricefloatGreaterThan(BigDecimal value) {
+            addCriterion("jpricefloat >", value, "jpricefloat");
             return (Criteria) this;
         }
 
-        public Criteria andNpriceGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("nprice >=", value, "nprice");
+        public Criteria andJpricefloatGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("jpricefloat >=", value, "jpricefloat");
             return (Criteria) this;
         }
 
-        public Criteria andNpriceLessThan(BigDecimal value) {
-            addCriterion("nprice <", value, "nprice");
+        public Criteria andJpricefloatLessThan(BigDecimal value) {
+            addCriterion("jpricefloat <", value, "jpricefloat");
             return (Criteria) this;
         }
 
-        public Criteria andNpriceLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("nprice <=", value, "nprice");
+        public Criteria andJpricefloatLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("jpricefloat <=", value, "jpricefloat");
             return (Criteria) this;
         }
 
-        public Criteria andNpriceIn(List<BigDecimal> values) {
-            addCriterion("nprice in", values, "nprice");
+        public Criteria andJpricefloatIn(List<BigDecimal> values) {
+            addCriterion("jpricefloat in", values, "jpricefloat");
             return (Criteria) this;
         }
 
-        public Criteria andNpriceNotIn(List<BigDecimal> values) {
-            addCriterion("nprice not in", values, "nprice");
+        public Criteria andJpricefloatNotIn(List<BigDecimal> values) {
+            addCriterion("jpricefloat not in", values, "jpricefloat");
             return (Criteria) this;
         }
 
-        public Criteria andNpriceBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("nprice between", value1, value2, "nprice");
+        public Criteria andJpricefloatBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("jpricefloat between", value1, value2, "jpricefloat");
             return (Criteria) this;
         }
 
-        public Criteria andNpriceNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("nprice not between", value1, value2, "nprice");
+        public Criteria andJpricefloatNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("jpricefloat not between", value1, value2, "jpricefloat");
             return (Criteria) this;
         }
 

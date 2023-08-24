@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.herb.mbg.mapper.PriceMapper">
-  <resultMap id="BaseResultMap" type="com.herb.mbg.model.Price">
+<mapper namespace="com.herb.mbg.mapper.PriceRankingMapper">
+  <resultMap id="BaseResultMap" type="com.herb.mbg.model.PriceRanking">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="standard" jdbcType="VARCHAR" property="standard" />
     <result column="origin" jdbcType="VARCHAR" property="origin" />
-    <result column="site" jdbcType="VARCHAR" property="site" />
-    <result column="measureunit" jdbcType="VARCHAR" property="measureunit" />
     <result column="newprice" jdbcType="DECIMAL" property="newprice" />
-    <result column="wprice" jdbcType="DECIMAL" property="wprice" />
     <result column="wpricefloat" jdbcType="DECIMAL" property="wpricefloat" />
-    <result column="yprice" jdbcType="DECIMAL" property="yprice" />
     <result column="ypricefloat" jdbcType="DECIMAL" property="ypricefloat" />
-    <result column="nprice" jdbcType="DECIMAL" property="nprice" />
+    <result column="jpricefloat" jdbcType="DECIMAL" property="jpricefloat" />
     <result column="npricefloat" jdbcType="DECIMAL" property="npricefloat" />
     <result column="newdate" jdbcType="DATE" property="newdate" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -78,16 +74,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, standard, origin, site, measureunit, newprice, wprice, wpricefloat, yprice, 
-    ypricefloat, nprice, npricefloat, newdate, create_time, update_time
+    id, name, standard, origin, newprice, wpricefloat, ypricefloat, jpricefloat, npricefloat, 
+    newdate, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="com.herb.mbg.model.PriceExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.herb.mbg.model.PriceRankingExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from price
+    from price_ranking
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -98,41 +94,37 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from price
+    from price_ranking
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from price
+    delete from price_ranking
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.herb.mbg.model.PriceExample">
-    delete from price
+  <delete id="deleteByExample" parameterType="com.herb.mbg.model.PriceRankingExample">
+    delete from price_ranking
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.herb.mbg.model.Price">
+  <insert id="insert" parameterType="com.herb.mbg.model.PriceRanking">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into price (name, standard, origin, 
-      site, measureunit, newprice, 
-      wprice, wpricefloat, yprice, 
-      ypricefloat, nprice, npricefloat, 
-      newdate, create_time, update_time
-      )
+    insert into price_ranking (name, standard, origin, 
+      newprice, wpricefloat, ypricefloat, 
+      jpricefloat, npricefloat, newdate, 
+      create_time, update_time)
     values (#{name,jdbcType=VARCHAR}, #{standard,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, 
-      #{site,jdbcType=VARCHAR}, #{measureunit,jdbcType=VARCHAR}, #{newprice,jdbcType=DECIMAL}, 
-      #{wprice,jdbcType=DECIMAL}, #{wpricefloat,jdbcType=DECIMAL}, #{yprice,jdbcType=DECIMAL}, 
-      #{ypricefloat,jdbcType=DECIMAL}, #{nprice,jdbcType=DECIMAL}, #{npricefloat,jdbcType=DECIMAL}, 
-      #{newdate,jdbcType=DATE}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{newprice,jdbcType=DECIMAL}, #{wpricefloat,jdbcType=DECIMAL}, #{ypricefloat,jdbcType=DECIMAL}, 
+      #{jpricefloat,jdbcType=DECIMAL}, #{npricefloat,jdbcType=DECIMAL}, #{newdate,jdbcType=DATE}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.herb.mbg.model.Price">
+  <insert id="insertSelective" parameterType="com.herb.mbg.model.PriceRanking">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into price
+    insert into price_ranking
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
         name,
@@ -143,29 +135,17 @@
       <if test="origin != null">
         origin,
       </if>
-      <if test="site != null">
-        site,
-      </if>
-      <if test="measureunit != null">
-        measureunit,
-      </if>
       <if test="newprice != null">
         newprice,
-      </if>
-      <if test="wprice != null">
-        wprice,
       </if>
       <if test="wpricefloat != null">
         wpricefloat,
       </if>
-      <if test="yprice != null">
-        yprice,
-      </if>
       <if test="ypricefloat != null">
         ypricefloat,
       </if>
-      <if test="nprice != null">
-        nprice,
+      <if test="jpricefloat != null">
+        jpricefloat,
       </if>
       <if test="npricefloat != null">
         npricefloat,
@@ -190,29 +170,17 @@
       <if test="origin != null">
         #{origin,jdbcType=VARCHAR},
       </if>
-      <if test="site != null">
-        #{site,jdbcType=VARCHAR},
-      </if>
-      <if test="measureunit != null">
-        #{measureunit,jdbcType=VARCHAR},
-      </if>
       <if test="newprice != null">
         #{newprice,jdbcType=DECIMAL},
-      </if>
-      <if test="wprice != null">
-        #{wprice,jdbcType=DECIMAL},
       </if>
       <if test="wpricefloat != null">
         #{wpricefloat,jdbcType=DECIMAL},
       </if>
-      <if test="yprice != null">
-        #{yprice,jdbcType=DECIMAL},
-      </if>
       <if test="ypricefloat != null">
         #{ypricefloat,jdbcType=DECIMAL},
       </if>
-      <if test="nprice != null">
-        #{nprice,jdbcType=DECIMAL},
+      <if test="jpricefloat != null">
+        #{jpricefloat,jdbcType=DECIMAL},
       </if>
       <if test="npricefloat != null">
         #{npricefloat,jdbcType=DECIMAL},
@@ -228,14 +196,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.herb.mbg.model.PriceExample" resultType="java.lang.Long">
-    select count(*) from price
+  <select id="countByExample" parameterType="com.herb.mbg.model.PriceRankingExample" resultType="java.lang.Long">
+    select count(*) from price_ranking
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update price
+    update price_ranking
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
@@ -249,29 +217,17 @@
       <if test="record.origin != null">
         origin = #{record.origin,jdbcType=VARCHAR},
       </if>
-      <if test="record.site != null">
-        site = #{record.site,jdbcType=VARCHAR},
-      </if>
-      <if test="record.measureunit != null">
-        measureunit = #{record.measureunit,jdbcType=VARCHAR},
-      </if>
       <if test="record.newprice != null">
         newprice = #{record.newprice,jdbcType=DECIMAL},
-      </if>
-      <if test="record.wprice != null">
-        wprice = #{record.wprice,jdbcType=DECIMAL},
       </if>
       <if test="record.wpricefloat != null">
         wpricefloat = #{record.wpricefloat,jdbcType=DECIMAL},
       </if>
-      <if test="record.yprice != null">
-        yprice = #{record.yprice,jdbcType=DECIMAL},
-      </if>
       <if test="record.ypricefloat != null">
         ypricefloat = #{record.ypricefloat,jdbcType=DECIMAL},
       </if>
-      <if test="record.nprice != null">
-        nprice = #{record.nprice,jdbcType=DECIMAL},
+      <if test="record.jpricefloat != null">
+        jpricefloat = #{record.jpricefloat,jdbcType=DECIMAL},
       </if>
       <if test="record.npricefloat != null">
         npricefloat = #{record.npricefloat,jdbcType=DECIMAL},
@@ -291,19 +247,15 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update price
+    update price_ranking
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
       standard = #{record.standard,jdbcType=VARCHAR},
       origin = #{record.origin,jdbcType=VARCHAR},
-      site = #{record.site,jdbcType=VARCHAR},
-      measureunit = #{record.measureunit,jdbcType=VARCHAR},
       newprice = #{record.newprice,jdbcType=DECIMAL},
-      wprice = #{record.wprice,jdbcType=DECIMAL},
       wpricefloat = #{record.wpricefloat,jdbcType=DECIMAL},
-      yprice = #{record.yprice,jdbcType=DECIMAL},
       ypricefloat = #{record.ypricefloat,jdbcType=DECIMAL},
-      nprice = #{record.nprice,jdbcType=DECIMAL},
+      jpricefloat = #{record.jpricefloat,jdbcType=DECIMAL},
       npricefloat = #{record.npricefloat,jdbcType=DECIMAL},
       newdate = #{record.newdate,jdbcType=DATE},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -312,8 +264,8 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.herb.mbg.model.Price">
-    update price
+  <update id="updateByPrimaryKeySelective" parameterType="com.herb.mbg.model.PriceRanking">
+    update price_ranking
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -324,29 +276,17 @@
       <if test="origin != null">
         origin = #{origin,jdbcType=VARCHAR},
       </if>
-      <if test="site != null">
-        site = #{site,jdbcType=VARCHAR},
-      </if>
-      <if test="measureunit != null">
-        measureunit = #{measureunit,jdbcType=VARCHAR},
-      </if>
       <if test="newprice != null">
         newprice = #{newprice,jdbcType=DECIMAL},
-      </if>
-      <if test="wprice != null">
-        wprice = #{wprice,jdbcType=DECIMAL},
       </if>
       <if test="wpricefloat != null">
         wpricefloat = #{wpricefloat,jdbcType=DECIMAL},
       </if>
-      <if test="yprice != null">
-        yprice = #{yprice,jdbcType=DECIMAL},
-      </if>
       <if test="ypricefloat != null">
         ypricefloat = #{ypricefloat,jdbcType=DECIMAL},
       </if>
-      <if test="nprice != null">
-        nprice = #{nprice,jdbcType=DECIMAL},
+      <if test="jpricefloat != null">
+        jpricefloat = #{jpricefloat,jdbcType=DECIMAL},
       </if>
       <if test="npricefloat != null">
         npricefloat = #{npricefloat,jdbcType=DECIMAL},
@@ -363,19 +303,15 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.herb.mbg.model.Price">
-    update price
+  <update id="updateByPrimaryKey" parameterType="com.herb.mbg.model.PriceRanking">
+    update price_ranking
     set name = #{name,jdbcType=VARCHAR},
       standard = #{standard,jdbcType=VARCHAR},
       origin = #{origin,jdbcType=VARCHAR},
-      site = #{site,jdbcType=VARCHAR},
-      measureunit = #{measureunit,jdbcType=VARCHAR},
       newprice = #{newprice,jdbcType=DECIMAL},
-      wprice = #{wprice,jdbcType=DECIMAL},
       wpricefloat = #{wpricefloat,jdbcType=DECIMAL},
-      yprice = #{yprice,jdbcType=DECIMAL},
       ypricefloat = #{ypricefloat,jdbcType=DECIMAL},
-      nprice = #{nprice,jdbcType=DECIMAL},
+      jpricefloat = #{jpricefloat,jdbcType=DECIMAL},
       npricefloat = #{npricefloat,jdbcType=DECIMAL},
       newdate = #{newdate,jdbcType=DATE},
       create_time = #{createTime,jdbcType=TIMESTAMP},

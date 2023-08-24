@@ -42,7 +42,7 @@ public class ManagerServiceImpl implements ManagerService {
         PageHelper.startPage(pageNum, pageSize);
         ManagerExample managerExample = new ManagerExample();
         if (StringUtils.isNotBlank(name)) {
-            managerExample.createCriteria().andNameLike(name);
+            managerExample.createCriteria().andNameLike("%" + name + "%");
         }
         return managerMapper.selectByExample(managerExample);
     }

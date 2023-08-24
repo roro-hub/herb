@@ -1,5 +1,6 @@
 package com.herb.controller;
 
+import com.herb.bo.PriceChartBO;
 import com.herb.common.api.CommonResult;
 import com.herb.mbg.model.Price;
 import com.herb.service.PriceService;
@@ -21,36 +22,19 @@ public class PriceController {
     @Resource
     private PriceService priceService;
 
-    @ApiOperation("新增")
-    @PostMapping
+    @ApiOperation("药材数据")
+    @PostMapping("/today")
     @ResponseBody
-    public CommonResult<Void> add(@RequestBody Price price) {
-        priceService.add(price);
-        return CommonResult.success();
+    public CommonResult<Price> today(@RequestBody Price price) {
+        Price result = priceService.today(price);
+        return CommonResult.success(result);
     }
 
-    @ApiOperation("编辑")
-    @PutMapping
+    @ApiOperation("历史一年内价格浮动数据")
+    @PostMapping("/chart")
     @ResponseBody
-    public CommonResult<Void> update(@RequestBody Price price) {
-        priceService.update(price);
-        return CommonResult.success();
+    public CommonResult<PriceChartBO> chart(@RequestBody Price price) {
+        PriceChartBO result = priceService.chart(price);
+        return CommonResult.success(result);
     }
-
-    @ApiOperation("删除")
-    @DeleteMapping("/{id}")
-    @ResponseBody
-    public CommonResult<Void> delete(@PathVariable Long id) {
-        priceService.delete(id);
-        return CommonResult.success();
-    }
-
-    @ApiOperation("存储")
-    @PostMapping("/save")
-    @ResponseBody
-    public CommonResult<Void> save() {
-        priceService.save();
-        return CommonResult.success();
-    }
-
 }

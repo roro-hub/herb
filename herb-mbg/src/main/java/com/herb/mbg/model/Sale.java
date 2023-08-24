@@ -2,24 +2,20 @@ package com.herb.mbg.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class Manager implements Serializable {
+public class Sale implements Serializable {
     private Long id;
 
-    @ApiModelProperty(value = "名称")
+    @ApiModelProperty(value = "药材名称")
     private String name;
 
-    @ApiModelProperty(value = "电话")
-    private String phone;
+    @ApiModelProperty(value = "销量")
+    private BigDecimal sales;
 
-    @ApiModelProperty(value = "邮箱")
-    private String email;
-
-    private String image;
-
-    @ApiModelProperty(value = "用户启用状态：0->禁用；1->启用")
-    private Integer status;
+    @ApiModelProperty(value = "记录时间")
+    private String recordMonth;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
@@ -45,36 +41,20 @@ public class Manager implements Serializable {
         this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
+    public BigDecimal getSales() {
+        return sales;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setSales(BigDecimal sales) {
+        this.sales = sales;
     }
 
-    public String getEmail() {
-        return email;
+    public String getRecordMonth() {
+        return recordMonth;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setRecordMonth(String recordMonth) {
+        this.recordMonth = recordMonth;
     }
 
     public Date getCreateTime() {
@@ -101,10 +81,8 @@ public class Manager implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", phone=").append(phone);
-        sb.append(", email=").append(email);
-        sb.append(", image=").append(image);
-        sb.append(", status=").append(status);
+        sb.append(", sales=").append(sales);
+        sb.append(", recordMonth=").append(recordMonth);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

@@ -55,7 +55,7 @@ public class InfoController {
     }
 
     @ApiOperation("查询信息列表")
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ResponseBody
     public CommonResult<List<Info>> list(@RequestParam(value = "types") List<String> types) {
         List<Info> infos = infoService.list(types);
