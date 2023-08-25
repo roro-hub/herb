@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.herb.dao.PriceDao">
+
+    <select id="groupByMonth" resultType="com.herb.dto.PriceDto">
+        SELECT
+        `name`,
+        standard,
+        DATE_FORMAT(newdate,'%Y.%m') as `date`,
+        avg( newprice ) as newprice
+        FROM
+        price
+        <where>
+            <if test="names != null and names.size() > 0">
+                and `name` in
+                <foreach collection="names" item="name" open="(" close=")" separator=",">
+                    #{name}
+                </foreach>
+            </if>
+            <if test="standards != null and standards.size() > 0">
+                and `standard` in
+                <foreach collection="standards" item="standard" open="(" close=")" separator=",">
+                    #{standard}
+                </foreach>
+            </if>
+            <if test="startTime != null and endTime != null">
+                and newdate between #{startTime} and #{endTime}
+            </if>
+        </where>
+        GROUP BY
+            `name`,
+            DATE_FORMAT(newdate,'%Y.%m'),
+            standard,
+            newprice
+    </select>
+</mapper>

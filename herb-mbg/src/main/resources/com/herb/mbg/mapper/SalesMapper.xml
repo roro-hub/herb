@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.herb.mbg.mapper.SaleMapper">
-  <resultMap id="BaseResultMap" type="com.herb.mbg.model.Sale">
+<mapper namespace="com.herb.mbg.mapper.SalesMapper">
+  <resultMap id="BaseResultMap" type="com.herb.mbg.model.Sales">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="sales" jdbcType="DECIMAL" property="sales" />
+    <result column="quantity" jdbcType="DECIMAL" property="quantity" />
     <result column="record_month" jdbcType="VARCHAR" property="recordMonth" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -68,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, sales, record_month, create_time, update_time
+    id, name, quantity, record_month, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="com.herb.mbg.model.SaleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.herb.mbg.model.SalesExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from sale
+    from sales
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,39 +87,39 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sale
+    from sales
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from sale
+    delete from sales
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.herb.mbg.model.SaleExample">
-    delete from sale
+  <delete id="deleteByExample" parameterType="com.herb.mbg.model.SalesExample">
+    delete from sales
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.herb.mbg.model.Sale">
+  <insert id="insert" parameterType="com.herb.mbg.model.Sales">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into sale (name, sales, record_month, 
+    insert into sales (name, quantity, record_month, 
       create_time, update_time)
-    values (#{name,jdbcType=VARCHAR}, #{sales,jdbcType=DECIMAL}, #{recordMonth,jdbcType=VARCHAR}, 
+    values (#{name,jdbcType=VARCHAR}, #{quantity,jdbcType=DECIMAL}, #{recordMonth,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.herb.mbg.model.Sale">
+  <insert id="insertSelective" parameterType="com.herb.mbg.model.Sales">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into sale
+    insert into sales
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
         name,
       </if>
-      <if test="sales != null">
-        sales,
+      <if test="quantity != null">
+        quantity,
       </if>
       <if test="recordMonth != null">
         record_month,
@@ -135,8 +135,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="sales != null">
-        #{sales,jdbcType=DECIMAL},
+      <if test="quantity != null">
+        #{quantity,jdbcType=DECIMAL},
       </if>
       <if test="recordMonth != null">
         #{recordMonth,jdbcType=VARCHAR},
@@ -149,14 +149,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.herb.mbg.model.SaleExample" resultType="java.lang.Long">
-    select count(*) from sale
+  <select id="countByExample" parameterType="com.herb.mbg.model.SalesExample" resultType="java.lang.Long">
+    select count(*) from sales
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update sale
+    update sales
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
@@ -164,8 +164,8 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.sales != null">
-        sales = #{record.sales,jdbcType=DECIMAL},
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=DECIMAL},
       </if>
       <if test="record.recordMonth != null">
         record_month = #{record.recordMonth,jdbcType=VARCHAR},
@@ -182,10 +182,10 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update sale
+    update sales
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
-      sales = #{record.sales,jdbcType=DECIMAL},
+      quantity = #{record.quantity,jdbcType=DECIMAL},
       record_month = #{record.recordMonth,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -193,14 +193,14 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.herb.mbg.model.Sale">
-    update sale
+  <update id="updateByPrimaryKeySelective" parameterType="com.herb.mbg.model.Sales">
+    update sales
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="sales != null">
-        sales = #{sales,jdbcType=DECIMAL},
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=DECIMAL},
       </if>
       <if test="recordMonth != null">
         record_month = #{recordMonth,jdbcType=VARCHAR},
@@ -214,10 +214,10 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.herb.mbg.model.Sale">
-    update sale
+  <update id="updateByPrimaryKey" parameterType="com.herb.mbg.model.Sales">
+    update sales
     set name = #{name,jdbcType=VARCHAR},
-      sales = #{sales,jdbcType=DECIMAL},
+      quantity = #{quantity,jdbcType=DECIMAL},
       record_month = #{recordMonth,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

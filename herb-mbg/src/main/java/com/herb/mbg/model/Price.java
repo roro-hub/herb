@@ -1,6 +1,8 @@
 package com.herb.mbg.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -44,6 +46,7 @@ public class Price implements Serializable {
     @ApiModelProperty(value = "较去年价格比例")
     private BigDecimal npricefloat;
 
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     @ApiModelProperty(value = "记录时间")
     private Date newdate;
 

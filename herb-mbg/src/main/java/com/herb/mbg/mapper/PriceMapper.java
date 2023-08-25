@@ -2,8 +2,9 @@ package com.herb.mbg.mapper;
 
 import com.herb.mbg.model.Price;
 import com.herb.mbg.model.PriceExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface PriceMapper {
     long countByExample(PriceExample example);

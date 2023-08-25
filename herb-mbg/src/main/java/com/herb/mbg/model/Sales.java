@@ -5,14 +5,14 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Sale implements Serializable {
+public class Sales implements Serializable {
     private Long id;
 
     @ApiModelProperty(value = "药材名称")
     private String name;
 
     @ApiModelProperty(value = "销量")
-    private BigDecimal sales;
+    private BigDecimal quantity;
 
     @ApiModelProperty(value = "记录时间")
     private String recordMonth;
@@ -41,12 +41,12 @@ public class Sale implements Serializable {
         this.name = name;
     }
 
-    public BigDecimal getSales() {
-        return sales;
+    public BigDecimal getQuantity() {
+        return quantity;
     }
 
-    public void setSales(BigDecimal sales) {
-        this.sales = sales;
+    public void setQuantity(BigDecimal quantity) {
+        this.quantity = quantity;
     }
 
     public String getRecordMonth() {
@@ -81,7 +81,7 @@ public class Sale implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", sales=").append(sales);
+        sb.append(", quantity=").append(quantity);
         sb.append(", recordMonth=").append(recordMonth);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);

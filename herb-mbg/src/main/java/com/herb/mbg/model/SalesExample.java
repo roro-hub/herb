@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SaleExample {
+public class SalesExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public SaleExample() {
+    public SalesExample() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -236,63 +236,63 @@ public class SaleExample {
             return (Criteria) this;
         }
 
-        public Criteria andSalesIsNull() {
-            addCriterion("sales is null");
+        public Criteria andQuantityIsNull() {
+            addCriterion("quantity is null");
             return (Criteria) this;
         }
 
-        public Criteria andSalesIsNotNull() {
-            addCriterion("sales is not null");
+        public Criteria andQuantityIsNotNull() {
+            addCriterion("quantity is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSalesEqualTo(BigDecimal value) {
-            addCriterion("sales =", value, "sales");
+        public Criteria andQuantityEqualTo(BigDecimal value) {
+            addCriterion("quantity =", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andSalesNotEqualTo(BigDecimal value) {
-            addCriterion("sales <>", value, "sales");
+        public Criteria andQuantityNotEqualTo(BigDecimal value) {
+            addCriterion("quantity <>", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andSalesGreaterThan(BigDecimal value) {
-            addCriterion("sales >", value, "sales");
+        public Criteria andQuantityGreaterThan(BigDecimal value) {
+            addCriterion("quantity >", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andSalesGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("sales >=", value, "sales");
+        public Criteria andQuantityGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("quantity >=", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andSalesLessThan(BigDecimal value) {
-            addCriterion("sales <", value, "sales");
+        public Criteria andQuantityLessThan(BigDecimal value) {
+            addCriterion("quantity <", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andSalesLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("sales <=", value, "sales");
+        public Criteria andQuantityLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("quantity <=", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andSalesIn(List<BigDecimal> values) {
-            addCriterion("sales in", values, "sales");
+        public Criteria andQuantityIn(List<BigDecimal> values) {
+            addCriterion("quantity in", values, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andSalesNotIn(List<BigDecimal> values) {
-            addCriterion("sales not in", values, "sales");
+        public Criteria andQuantityNotIn(List<BigDecimal> values) {
+            addCriterion("quantity not in", values, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andSalesBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("sales between", value1, value2, "sales");
+        public Criteria andQuantityBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("quantity between", value1, value2, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andSalesNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("sales not between", value1, value2, "sales");
+        public Criteria andQuantityNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("quantity not between", value1, value2, "quantity");
             return (Criteria) this;
         }
 
