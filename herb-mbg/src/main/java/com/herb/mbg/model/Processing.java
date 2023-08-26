@@ -10,6 +10,13 @@ public class Processing implements Serializable {
     @ApiModelProperty(value = "药草ID")
     private Long herbId;
 
+    private String herbName;
+
+    private String type;
+
+    @ApiModelProperty(value = "药草名称")
+    private String name;
+
     @ApiModelProperty(value = "图片")
     private String images;
 
@@ -18,6 +25,8 @@ public class Processing implements Serializable {
 
     @ApiModelProperty(value = "视频")
     private String video;
+
+    private Integer sort;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
@@ -41,6 +50,30 @@ public class Processing implements Serializable {
 
     public void setHerbId(Long herbId) {
         this.herbId = herbId;
+    }
+
+    public String getHerbName() {
+        return herbName;
+    }
+
+    public void setHerbName(String herbName) {
+        this.herbName = herbName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getImages() {
@@ -67,6 +100,14 @@ public class Processing implements Serializable {
         this.video = video;
     }
 
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -91,9 +132,13 @@ public class Processing implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", herbId=").append(herbId);
+        sb.append(", herbName=").append(herbName);
+        sb.append(", type=").append(type);
+        sb.append(", name=").append(name);
         sb.append(", images=").append(images);
         sb.append(", content=").append(content);
         sb.append(", video=").append(video);
+        sb.append(", sort=").append(sort);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

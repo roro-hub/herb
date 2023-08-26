@@ -18,6 +18,7 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class PriceServiceImpl implements PriceService {
@@ -26,21 +27,6 @@ public class PriceServiceImpl implements PriceService {
     private PriceMapper priceMapper;
     @Resource
     private PriceDao priceDao;
-
-    @Override
-    public Price today(Price price) {
-        PriceExample example = new PriceExample();
-        PriceExample.Criteria criteria = example.createCriteria().andNameEqualTo(price.getName());
-        if (StringUtils.isNotBlank(price.getOrigin())) {
-            criteria.andOriginEqualTo(price.getOrigin());
-        }
-        if (StringUtils.isNotBlank(price.getSite())) {
-            criteria.andSiteEqualTo(price.getSite());
-        }
-        criteria.andNewdateEqualTo(new Date());
-        List<Price> prices = priceMapper.selectByExample(example);
-        return CollectionUtils.isEmpty(prices) ? new Price() : prices.get(0);
-    }
 
     @Override
     public List<Price> list(String name, String standard, String origin, String site, Integer pageNum, Integer pageSize) {
@@ -91,10 +77,23 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public Map<String, Map<String, Map<String, BigDecimal>>> recently(List<String> names, List<String> standards, String origin, String site) {
-        List<PriceDto> prices = priceDao.groupByMonth(names, standards,
-                new java.sql.Date(DateUtils.addMonths(new Date(), -5).getTime()),
-                new java.sql.Date(new Date().getTime()));
+    public Map<String, Map<String, Map<String, BigDecimal>>> recently(List<String> names,
+                                                                      List<String> standards,
+                                                                      String origin,
+                                                                      String site,
+                                                                      Integer month) {
+        Date startDate = null;
+        Date endDate = null;
+        if (month != null && month > 0) {
+            startDate = new java.sql.Date(DateUtils.addMonths(new Date(), -month).getTime());
+            endDate = new java.sql.Date(new Date().getTime());
+        }
+        List<PriceDto> prices = priceDao.groupByMonth(names,
+                standards,
+                origin,
+                site,
+                startDate,
+                endDate);
         Map<String, Map<String, Map<String, BigDecimal>>> result = new HashMap<>();
         prices.forEach(p -> {
             Map<String, Map<String, BigDecimal>> standardMap = result.get(p.getName());
@@ -110,5 +109,18 @@ public class PriceServiceImpl implements PriceService {
             result.put(p.getName(), standardMap);
         });
         return result;
+    }
+
+    @Override
+    public Map<String, BigDecimal> todaySite(String name, String standard, String origin) {
+        PriceExample example = new PriceExample();
+        example.createCriteria()
+                .andNameEqualTo(name)
+                .andStandardEqualTo(standard)
+                .andOriginEqualTo(origin)
+                .andNewdateEqualTo(new Date());
+        List<Price> prices = priceMapper.selectByExample(example);
+        return prices.stream().collect(Collectors
+                .toMap(Price::getSite, Price::getNewprice, (v1, v2) -> v1));
     }
 }

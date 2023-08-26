@@ -43,12 +43,23 @@ public class SalesServiceImpl implements SalesService {
     }
 
     @Override
-    public List<Sales> list(String name, String recordMonth, Integer pageSize, Integer pageNum) {
+    public List<Sales> list(String name,
+                            String type,
+                            Long herbId,
+                            String recordMonth,
+                            Integer pageSize,
+                            Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         SalesExample salesExample = new SalesExample();
         SalesExample.Criteria criteria = salesExample.createCriteria();
         if (StringUtils.isNotBlank(name)) {
             criteria.andNameLike("%" + name + "%");
+        }
+        if (herbId != null && herbId > 0) {
+            criteria.andHerbIdEqualTo(herbId);
+        }
+        if (StringUtils.isNotBlank(type)) {
+            criteria.andTypeEqualTo(type);
         }
         if (StringUtils.isNotBlank(recordMonth)) {
             criteria.andRecordMonthEqualTo(recordMonth);
@@ -57,15 +68,17 @@ public class SalesServiceImpl implements SalesService {
     }
 
     @Override
-    public Map<String, Map<String, BigDecimal>> recently(List<String> names) {
+    public Map<String, Map<String, BigDecimal>> recently(List<String> names, Integer month, String type) {
         SalesExample salesExample = new SalesExample();
-        SalesExample.Criteria criteria = salesExample.createCriteria();
+        SalesExample.Criteria criteria = salesExample.createCriteria()
+                .andTypeEqualTo(type);;
 
-        String startDate = DateFormatUtils.format(DateUtils.addMonths(new Date(), -5), "yyyy-MM");
-        String endDate = DateFormatUtils.format(new Date(), "yyyy-MM");
-
-        criteria.andRecordMonthGreaterThan(startDate);
-        criteria.andRecordMonthLessThanOrEqualTo(endDate);
+        if (month != null && month > 0) {
+            String startDate = DateFormatUtils.format(DateUtils.addMonths(new Date(), -month), "yyyy-MM");
+            String endDate = DateFormatUtils.format(new Date(), "yyyy-MM");
+            criteria.andRecordMonthGreaterThan(startDate);
+            criteria.andRecordMonthLessThanOrEqualTo(endDate);
+        }
         if (CollectionUtils.isNotEmpty(names)) {
             criteria.andNameIn(names);
         }

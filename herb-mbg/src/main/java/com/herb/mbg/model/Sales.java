@@ -8,8 +8,12 @@ import java.util.Date;
 public class Sales implements Serializable {
     private Long id;
 
+    private Long herbId;
+
     @ApiModelProperty(value = "药材名称")
     private String name;
+
+    private String type;
 
     @ApiModelProperty(value = "销量")
     private BigDecimal quantity;
@@ -33,12 +37,28 @@ public class Sales implements Serializable {
         this.id = id;
     }
 
+    public Long getHerbId() {
+        return herbId;
+    }
+
+    public void setHerbId(Long herbId) {
+        this.herbId = herbId;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public BigDecimal getQuantity() {
@@ -80,7 +100,9 @@ public class Sales implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", herbId=").append(herbId);
         sb.append(", name=").append(name);
+        sb.append(", type=").append(type);
         sb.append(", quantity=").append(quantity);
         sb.append(", recordMonth=").append(recordMonth);
         sb.append(", createTime=").append(createTime);

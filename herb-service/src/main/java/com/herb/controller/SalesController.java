@@ -6,7 +6,6 @@ import com.herb.mbg.model.Sales;
 import com.herb.service.SalesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,19 +60,23 @@ public class SalesController {
     @ApiOperation("分页列表查询")
     @PostMapping("/list")
     @ResponseBody
-    public CommonResult<CommonPage<Sales>> list(@ApiParam("药材名称") @RequestParam(value = "name", required = false) String name,
+    public CommonResult<CommonPage<Sales>> list(@RequestParam(value = "name", required = false) String name,
+                                                @RequestParam(value = "type", required = false) String type,
+                                                @RequestParam(value = "herbId", required = false) Long herbId,
                                                 @RequestParam(value = "recordMonth", required = false) String recordMonth,
                                                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                 @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize) {
-        List<Sales> list = salesService.list(name, recordMonth, pageSize, pageNum);
+        List<Sales> list = salesService.list(name, type, herbId, recordMonth, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(list));
     }
     
-    @ApiOperation("最近五个月药材销量")
+    @ApiOperation("查询近n个月药材销量")
     @PostMapping("/recently")
     @ResponseBody
-    public CommonResult<Map<String, Map<String, BigDecimal>>> recently(@RequestParam(value = "names", required = false) List<String> names) {
-        Map<String, Map<String, BigDecimal>> result = salesService.recently(names);
+    public CommonResult<Map<String, Map<String, BigDecimal>>> recently(@RequestParam(value = "names", required = false) List<String> names,
+                                                                       @RequestParam(value = "month", required = false) Integer month,
+                                                                       @RequestParam(value = "type") String type) {
+        Map<String, Map<String, BigDecimal>> result = salesService.recently(names, month, type);
         return CommonResult.success(result);
     }
 }

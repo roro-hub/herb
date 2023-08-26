@@ -295,6 +295,76 @@ public class HerbExample {
             return (Criteria) this;
         }
 
+        public Criteria andHerbTypeNameIsNull() {
+            addCriterion("herb_type_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbTypeNameIsNotNull() {
+            addCriterion("herb_type_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbTypeNameEqualTo(String value) {
+            addCriterion("herb_type_name =", value, "herbTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbTypeNameNotEqualTo(String value) {
+            addCriterion("herb_type_name <>", value, "herbTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbTypeNameGreaterThan(String value) {
+            addCriterion("herb_type_name >", value, "herbTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbTypeNameGreaterThanOrEqualTo(String value) {
+            addCriterion("herb_type_name >=", value, "herbTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbTypeNameLessThan(String value) {
+            addCriterion("herb_type_name <", value, "herbTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbTypeNameLessThanOrEqualTo(String value) {
+            addCriterion("herb_type_name <=", value, "herbTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbTypeNameLike(String value) {
+            addCriterion("herb_type_name like", value, "herbTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbTypeNameNotLike(String value) {
+            addCriterion("herb_type_name not like", value, "herbTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbTypeNameIn(List<String> values) {
+            addCriterion("herb_type_name in", values, "herbTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbTypeNameNotIn(List<String> values) {
+            addCriterion("herb_type_name not in", values, "herbTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbTypeNameBetween(String value1, String value2) {
+            addCriterion("herb_type_name between", value1, value2, "herbTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbTypeNameNotBetween(String value1, String value2) {
+            addCriterion("herb_type_name not between", value1, value2, "herbTypeName");
+            return (Criteria) this;
+        }
+
         public Criteria andImagesIsNull() {
             addCriterion("images is null");
             return (Criteria) this;

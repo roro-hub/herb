@@ -9,8 +9,6 @@ import java.util.Map;
 
 public interface PriceService {
 
-    Price today(Price price);
-
     List<Price> list(String name, String standard, String origin, String site, Integer pageNum, Integer pageSize);
 
     PriceChartBO history(Price price);
@@ -18,5 +16,8 @@ public interface PriceService {
     Map<String, Map<String, Map<String, BigDecimal>>> recently(List<String> names,
                                                                List<String> standards,
                                                                String origin,
-                                                               String site);
+                                                               String site,
+                                                               Integer month);
+
+    Map<String, BigDecimal> todaySite(String name, String standard, String origin);
 }

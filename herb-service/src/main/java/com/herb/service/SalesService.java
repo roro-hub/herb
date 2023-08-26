@@ -16,7 +16,12 @@ public interface SalesService {
 
     Sales get(Long id);
 
-    List<Sales> list(String name, String recordMonth, Integer pageSize, Integer pageNum);
+    List<Sales> list(String name,
+                     String type,
+                     Long herbId,
+                     String recordMonth,
+                     Integer pageSize,
+                     Integer pageNum);
 
-    Map<String, Map<String, BigDecimal>> recently(List<String> names);
+    Map<String, Map<String, BigDecimal>> recently(List<String> names, Integer month, String type);
 }

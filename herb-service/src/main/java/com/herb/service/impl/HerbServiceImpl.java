@@ -1,17 +1,15 @@
 package com.herb.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.herb.common.util.HttpClientUtil;
 import com.herb.mbg.mapper.HerbMapper;
 import com.herb.mbg.model.Herb;
 import com.herb.mbg.model.HerbExample;
 import com.herb.service.HerbService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class HerbServiceImpl implements HerbService {
@@ -35,10 +33,21 @@ public class HerbServiceImpl implements HerbService {
     }
 
     @Override
-    public List<Herb> list(String name, Integer pageSize, Integer pageNum) {
+    public Herb get(Long id) {
+        return herbMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Herb> list(String name, Long herbType, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         HerbExample herbExample = new HerbExample();
-        herbExample.createCriteria().andNameLike(name);
+        HerbExample.Criteria criteria = herbExample.createCriteria();
+        if (StringUtils.isNotBlank(name)) {
+            criteria.andNameLike(name);
+        }
+        if (herbType != null && herbType > 0) {
+            criteria.andHerbTypeEqualTo(herbType);
+        }
         return herbMapper.selectByExample(herbExample);
     }
 }

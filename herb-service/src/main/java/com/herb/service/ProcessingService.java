@@ -12,5 +12,7 @@ public interface ProcessingService {
 
     void delete(Long id);
 
-    List<Processing> list(Long herbId, Integer pageSize, Integer pageNum);
+    Processing get(Long id);
+
+    List<Processing> list(String name, String type, Long herbId, String herbName, Integer pageSize, Integer pageNum);
 }

@@ -13,6 +13,8 @@ public class Herb implements Serializable {
     @ApiModelProperty(value = "药材类型")
     private Long herbType;
 
+    private String herbTypeName;
+
     @ApiModelProperty(value = "图片")
     private String images;
 
@@ -49,6 +51,14 @@ public class Herb implements Serializable {
 
     public void setHerbType(Long herbType) {
         this.herbType = herbType;
+    }
+
+    public String getHerbTypeName() {
+        return herbTypeName;
+    }
+
+    public void setHerbTypeName(String herbTypeName) {
+        this.herbTypeName = herbTypeName;
     }
 
     public String getImages() {
@@ -92,6 +102,7 @@ public class Herb implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
         sb.append(", herbType=").append(herbType);
+        sb.append(", herbTypeName=").append(herbTypeName);
         sb.append(", images=").append(images);
         sb.append(", content=").append(content);
         sb.append(", createTime=").append(createTime);

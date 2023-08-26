@@ -26,14 +26,6 @@ public class PriceController {
     @Resource
     private PriceService priceService;
 
-    @ApiOperation("当天药材数据")
-    @PostMapping("/today")
-    @ResponseBody
-    public CommonResult<Price> today(@RequestBody Price price) {
-        Price result = priceService.today(price);
-        return CommonResult.success(result);
-    }
-
     @ApiOperation("药材分页查询")
     @PostMapping("/list")
     @ResponseBody
@@ -55,15 +47,27 @@ public class PriceController {
         return CommonResult.success(result);
     }
 
-    @ApiOperation("最近五个月药材价格数据")
+    @ApiOperation("最近几个月药材价格数据")
     @PostMapping("/recently")
     @ResponseBody
     public CommonResult<Map<String, Map<String, Map<String, BigDecimal>>>> recently(
             @RequestParam(value = "names", required = false) List<String> names,
             @RequestParam(value = "standards", required = false) List<String> standards,
             @RequestParam(value = "origin", required = false) String origin,
-            @RequestParam(value = "site", required = false) String site) {
-        Map<String, Map<String, Map<String, BigDecimal>>> result = priceService.recently(names, standards, origin, site);
+            @RequestParam(value = "site", required = false) String site,
+            @RequestParam(value = "month", required = false) Integer month) {
+        Map<String, Map<String, Map<String, BigDecimal>>> result = priceService.recently(names, standards, origin, site, month);
+        return CommonResult.success(result);
+    }
+
+    @ApiOperation("查询当天药材产地数据")
+    @PostMapping("/todaySite")
+    @ResponseBody
+    public CommonResult<Map<String, BigDecimal>> todaySite(
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "standard") String standard,
+            @RequestParam(value = "origin") String origin) {
+        Map<String, BigDecimal> result = priceService.todaySite(name, standard, origin);
         return CommonResult.success(result);
     }
 }

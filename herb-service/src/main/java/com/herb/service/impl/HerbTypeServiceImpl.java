@@ -5,6 +5,7 @@ import com.herb.mbg.mapper.HerbTypeMapper;
 import com.herb.mbg.model.HerbType;
 import com.herb.mbg.model.HerbTypeExample;
 import com.herb.service.HerbTypeService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -32,10 +33,17 @@ public class HerbTypeServiceImpl implements HerbTypeService {
     }
 
     @Override
+    public HerbType get(Long id) {
+        return herbTypeMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public List<HerbType> list(String name, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         HerbTypeExample herbTypeExample = new HerbTypeExample();
-        herbTypeExample.createCriteria().andNameLike(name);
+        if (StringUtils.isNotBlank(name)) {
+            herbTypeExample.createCriteria().andNameLike(name);
+        }
         return herbTypeMapper.selectByExample(herbTypeExample);
     }
 }

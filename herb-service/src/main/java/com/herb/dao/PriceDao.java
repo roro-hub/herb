@@ -7,5 +7,10 @@ import java.util.List;
 
 public interface PriceDao {
 
-    List<PriceDto> groupByMonth(List<String> names, List<String> standards, Date startTime, Date endTime);
+    List<PriceDto> groupByMonth(List<String> names,
+                                List<String> standards,
+                                String origin,
+                                String site,
+                                Date startTime,
+                                Date endTime);
 }

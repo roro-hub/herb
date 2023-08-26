@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="herb_type" jdbcType="BIGINT" property="herbType" />
+    <result column="herb_type_name" jdbcType="VARCHAR" property="herbTypeName" />
     <result column="images" jdbcType="VARCHAR" property="images" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, herb_type, images, content, create_time, update_time
+    id, name, herb_type, herb_type_name, images, content, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.herb.mbg.model.HerbExample" resultMap="BaseResultMap">
     select
@@ -105,12 +106,12 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into herb (name, herb_type, images, 
-      content, create_time, update_time
-      )
-    values (#{name,jdbcType=VARCHAR}, #{herbType,jdbcType=BIGINT}, #{images,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+    insert into herb (name, herb_type, herb_type_name, 
+      images, content, create_time, 
+      update_time)
+    values (#{name,jdbcType=VARCHAR}, #{herbType,jdbcType=BIGINT}, #{herbTypeName,jdbcType=VARCHAR}, 
+      #{images,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.herb.mbg.model.Herb">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -123,6 +124,9 @@
       </if>
       <if test="herbType != null">
         herb_type,
+      </if>
+      <if test="herbTypeName != null">
+        herb_type_name,
       </if>
       <if test="images != null">
         images,
@@ -143,6 +147,9 @@
       </if>
       <if test="herbType != null">
         #{herbType,jdbcType=BIGINT},
+      </if>
+      <if test="herbTypeName != null">
+        #{herbTypeName,jdbcType=VARCHAR},
       </if>
       <if test="images != null">
         #{images,jdbcType=VARCHAR},
@@ -176,6 +183,9 @@
       <if test="record.herbType != null">
         herb_type = #{record.herbType,jdbcType=BIGINT},
       </if>
+      <if test="record.herbTypeName != null">
+        herb_type_name = #{record.herbTypeName,jdbcType=VARCHAR},
+      </if>
       <if test="record.images != null">
         images = #{record.images,jdbcType=VARCHAR},
       </if>
@@ -198,6 +208,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
       herb_type = #{record.herbType,jdbcType=BIGINT},
+      herb_type_name = #{record.herbTypeName,jdbcType=VARCHAR},
       images = #{record.images,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -214,6 +225,9 @@
       </if>
       <if test="herbType != null">
         herb_type = #{herbType,jdbcType=BIGINT},
+      </if>
+      <if test="herbTypeName != null">
+        herb_type_name = #{herbTypeName,jdbcType=VARCHAR},
       </if>
       <if test="images != null">
         images = #{images,jdbcType=VARCHAR},
@@ -234,6 +248,7 @@
     update herb
     set name = #{name,jdbcType=VARCHAR},
       herb_type = #{herbType,jdbcType=BIGINT},
+      herb_type_name = #{herbTypeName,jdbcType=VARCHAR},
       images = #{images,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

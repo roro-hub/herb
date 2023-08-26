@@ -12,5 +12,7 @@ public interface HerbTypeService {
 
     void delete(Long id);
 
+    HerbType get(Long id);
+
     List<HerbType> list(String name, Integer pageSize, Integer pageNum);
 }

@@ -6,7 +6,6 @@ import com.herb.mbg.model.Herb;
 import com.herb.service.HerbService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,13 +47,22 @@ public class HerbController {
         return CommonResult.success();
     }
 
+    @ApiOperation("详情")
+    @GetMapping("/{id}")
+    @ResponseBody
+    public CommonResult<Herb> get(@PathVariable Long id) {
+        Herb herb = herbService.get(id);
+        return CommonResult.success(herb);
+    }
+
     @ApiOperation("分页列表查询")
     @PostMapping("/list")
     @ResponseBody
-    public CommonResult<CommonPage<Herb>> list(@ApiParam("名称") @RequestParam(value = "name") String name,
+    public CommonResult<CommonPage<Herb>> list(@RequestParam(value = "name", required = false) String name,
+                                               @RequestParam(value = "herbType", required = false) Long herbType,
                                                @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
                                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        List<Herb> list = herbService.list(name, pageSize, pageNum);
+        List<Herb> list = herbService.list(name, herbType, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(list));
     }
 

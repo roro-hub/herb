@@ -23,6 +23,12 @@
                     #{standard}
                 </foreach>
             </if>
+            <if test="origin != null">
+                and origin = #{origin}
+            </if>
+            <if test="site != null">
+                and site = #{site}
+            </if>
             <if test="startTime != null and endTime != null">
                 and newdate between #{startTime} and #{endTime}
             </if>

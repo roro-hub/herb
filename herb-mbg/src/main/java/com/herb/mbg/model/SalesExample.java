@@ -166,6 +166,66 @@ public class SalesExample {
             return (Criteria) this;
         }
 
+        public Criteria andHerbIdIsNull() {
+            addCriterion("herb_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbIdIsNotNull() {
+            addCriterion("herb_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbIdEqualTo(Long value) {
+            addCriterion("herb_id =", value, "herbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbIdNotEqualTo(Long value) {
+            addCriterion("herb_id <>", value, "herbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbIdGreaterThan(Long value) {
+            addCriterion("herb_id >", value, "herbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("herb_id >=", value, "herbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbIdLessThan(Long value) {
+            addCriterion("herb_id <", value, "herbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbIdLessThanOrEqualTo(Long value) {
+            addCriterion("herb_id <=", value, "herbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbIdIn(List<Long> values) {
+            addCriterion("herb_id in", values, "herbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbIdNotIn(List<Long> values) {
+            addCriterion("herb_id not in", values, "herbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbIdBetween(Long value1, Long value2) {
+            addCriterion("herb_id between", value1, value2, "herbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHerbIdNotBetween(Long value1, Long value2) {
+            addCriterion("herb_id not between", value1, value2, "herbId");
+            return (Criteria) this;
+        }
+
         public Criteria andNameIsNull() {
             addCriterion("name is null");
             return (Criteria) this;
@@ -233,6 +293,76 @@ public class SalesExample {
 
         public Criteria andNameNotBetween(String value1, String value2) {
             addCriterion("name not between", value1, value2, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeEqualTo(String value) {
+            addCriterion("type =", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotEqualTo(String value) {
+            addCriterion("type <>", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThan(String value) {
+            addCriterion("type >", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("type >=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThan(String value) {
+            addCriterion("type <", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThanOrEqualTo(String value) {
+            addCriterion("type <=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLike(String value) {
+            addCriterion("type like", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotLike(String value) {
+            addCriterion("type not like", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIn(List<String> values) {
+            addCriterion("type in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotIn(List<String> values) {
+            addCriterion("type not in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeBetween(String value1, String value2) {
+            addCriterion("type between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotBetween(String value1, String value2) {
+            addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
 
