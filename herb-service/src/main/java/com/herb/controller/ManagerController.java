@@ -60,7 +60,7 @@ public class ManagerController {
     @PostMapping("/list")
     @ResponseBody
     public CommonResult<CommonPage<Manager>> list(@ApiParam("管理员名称") @RequestParam(value = "name", required = false) String name,
-                                                  @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
+                                                  @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
                                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<Manager> list = managerService.list(name, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(list));

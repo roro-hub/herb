@@ -1,5 +1,6 @@
 package com.herb.controller;
 
+import com.herb.common.api.CommonPage;
 import com.herb.common.api.CommonResult;
 import com.herb.mbg.model.PriceRanking;
 import com.herb.service.PriceRankingService;
@@ -28,8 +29,12 @@ public class PriceRankingController {
     @ApiOperation("今日价格浮动数据")
     @PostMapping("/today")
     @ResponseBody
-    public CommonResult<List<PriceRanking>> today(@RequestParam(value = "names", required = false) List<String> names) {
-        List<PriceRanking> list = priceRankingService.today(names);
-        return CommonResult.success(list);
+    public CommonResult<CommonPage<PriceRanking>> today(@RequestParam(value = "names", required = false) List<String> names,
+                                                        @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                                        @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                                                        @RequestParam(value = "orderBy", defaultValue = "create_time") String orderBy,
+                                                        @RequestParam(value = "sort", defaultValue = "desc") String sort) {
+        List<PriceRanking> list = priceRankingService.today(names, pageNum, pageSize, orderBy, sort);
+        return CommonResult.success(CommonPage.restPage(list));
     }
 }

@@ -39,4 +39,33 @@
             standard,
             newprice
     </select>
+
+    <select id="getLatestDate" resultType="java.util.Date">
+        SELECT `newdate`
+        FROM price
+        order by `newdate` desc
+        limit 1
+    </select>
+
+    <select id="getSiteList" resultType="java.lang.String">
+        SELECT
+            distinct `site`
+        FROM
+            price
+        <where>
+            AND newprice != ''
+            <if test="name != null">
+                and `name` = #{name}
+            </if>
+            <if test="standard != null">
+                and standard = #{standard}
+            </if>
+            <if test="origin != null">
+                and origin = #{origin}
+            </if>
+            <if test="startDate != null and endDate != null">
+                and newdate between #{startDate} and #{endDate}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -13,4 +13,8 @@ public interface PriceDao {
                                 String site,
                                 Date startTime,
                                 Date endTime);
+
+    Date getLatestDate();
+
+    List<String> getSiteList(String name, String standard, String origin, Date startDate, Date endDate);
 }

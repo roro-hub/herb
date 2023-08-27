@@ -1,6 +1,7 @@
 package com.herb.controller;
 
 import com.herb.bo.PriceChartBO;
+import com.herb.bo.PriceTodayBO;
 import com.herb.common.api.CommonPage;
 import com.herb.common.api.CommonResult;
 import com.herb.mbg.model.Price;
@@ -26,6 +27,15 @@ public class PriceController {
     @Resource
     private PriceService priceService;
 
+    @ApiOperation("最近药材分页查询")
+    @PostMapping("/latestList")
+    @ResponseBody
+    public CommonResult<CommonPage<PriceTodayBO>> latestList(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                                             @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        CommonPage<PriceTodayBO> list = priceService.latestList(pageNum, pageSize);
+        return CommonResult.success(list);
+    }
+
     @ApiOperation("药材分页查询")
     @PostMapping("/list")
     @ResponseBody
@@ -34,8 +44,10 @@ public class PriceController {
                                                 @RequestParam(value = "origin", required = false) String origin,
                                                 @RequestParam(value = "site", required = false) String site,
                                                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                                @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize) {
-        List<Price> list = priceService.list(name, standard, origin, site, pageNum, pageSize);
+                                                @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                                                @RequestParam(value = "orderBy", defaultValue = "create_time") String orderBy,
+                                                @RequestParam(value = "sort", defaultValue = "desc") String sort) {
+        List<Price> list = priceService.list(name, standard, origin, site, pageNum, pageSize, orderBy, sort);
         return CommonResult.success(CommonPage.restPage(list));
     }
 
@@ -60,14 +72,24 @@ public class PriceController {
         return CommonResult.success(result);
     }
 
-    @ApiOperation("查询当天药材产地数据")
-    @PostMapping("/todaySite")
+    @ApiOperation("查询最近药材产地数据")
+    @PostMapping("/latestSite")
     @ResponseBody
-    public CommonResult<Map<String, BigDecimal>> todaySite(
+    public CommonResult<Map<String, BigDecimal>> latestSite(
             @RequestParam(value = "name") String name,
             @RequestParam(value = "standard") String standard,
             @RequestParam(value = "origin") String origin) {
-        Map<String, BigDecimal> result = priceService.todaySite(name, standard, origin);
+        Map<String, BigDecimal> result = priceService.latestSite(name, standard, origin);
+        return CommonResult.success(result);
+    }
+
+    @ApiOperation("查询药材近一年的市场")
+    @PostMapping("/site")
+    @ResponseBody
+    public CommonResult<List<String>> site(@RequestParam(value = "name") String name,
+                                           @RequestParam(value = "standard") String standard,
+                                           @RequestParam(value = "origin") String origin) {
+        List<String> result = priceService.site(name, standard, origin);
         return CommonResult.success(result);
     }
 }

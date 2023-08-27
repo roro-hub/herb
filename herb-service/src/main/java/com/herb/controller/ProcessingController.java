@@ -62,7 +62,7 @@ public class ProcessingController {
                                                      @RequestParam(value = "type", required = false) String type,
                                                      @RequestParam(value = "herbId", required = false) Long herbId,
                                                      @RequestParam(value = "herbName", required = false) String herbName,
-                                                     @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
+                                                     @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
                                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<Processing> list = processingService.list(name, type, herbId, herbName, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(list));

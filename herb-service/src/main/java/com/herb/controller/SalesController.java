@@ -65,7 +65,7 @@ public class SalesController {
                                                 @RequestParam(value = "herbId", required = false) Long herbId,
                                                 @RequestParam(value = "recordMonth", required = false) String recordMonth,
                                                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                                @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize) {
+                                                @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         List<Sales> list = salesService.list(name, type, herbId, recordMonth, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(list));
     }

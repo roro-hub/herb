@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface PriceRankingService {
 
-    List<PriceRanking> today(List<String> names);
+    List<PriceRanking> today(List<String> names, Integer pageNum, Integer pageSize,
+                             String orderBy, String sort);
 }

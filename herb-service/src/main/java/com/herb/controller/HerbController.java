@@ -60,7 +60,7 @@ public class HerbController {
     @ResponseBody
     public CommonResult<CommonPage<Herb>> list(@RequestParam(value = "name", required = false) String name,
                                                @RequestParam(value = "herbType", required = false) Long herbType,
-                                               @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
+                                               @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
                                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<Herb> list = herbService.list(name, herbType, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(list));
