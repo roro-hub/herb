@@ -11,17 +11,8 @@
         FROM
         price
         <where>
-            <if test="names != null and names.size() > 0">
-                and `name` in
-                <foreach collection="names" item="name" open="(" close=")" separator=",">
-                    #{name}
-                </foreach>
-            </if>
-            <if test="standards != null and standards.size() > 0">
-                and `standard` in
-                <foreach collection="standards" item="standard" open="(" close=")" separator=",">
-                    #{standard}
-                </foreach>
+            <if test="name != null">
+                and `name` = #{name}
             </if>
             <if test="origin != null">
                 and origin = #{origin}

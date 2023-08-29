@@ -16,13 +16,13 @@ public interface PriceService {
     List<Price> list(String name, String standard, String origin, String site,
                      Integer pageNum, Integer pageSize, String orderBy, String sort);
 
-    PriceChartBO history(Price price);
+    PriceChartBO history(String name, String standard, String origin, String site);
 
-    Map<String, Map<String, Map<String, BigDecimal>>> recently(List<String> names,
-                                                               List<String> standards,
-                                                               String origin,
-                                                               String site,
-                                                               Integer month);
+    Map<String, Map<String, BigDecimal>> recently(
+            String herbName,
+            String origin,
+            String site,
+            Integer month);
 
     Map<String, BigDecimal> latestSite(String name, String standard, String origin);
 

@@ -24,7 +24,7 @@ public class MapBlockServiceImpl implements MapBlockService {
 
     @Override
     public void update(MapBlock mapBlock) {
-        mapBlockMapper.updateByPrimaryKey(mapBlock);
+        mapBlockMapper.updateByPrimaryKeyWithBLOBs(mapBlock);
     }
 
     @Override
@@ -45,6 +45,6 @@ public class MapBlockServiceImpl implements MapBlockService {
         if (StringUtils.isNotBlank(name)) {
             criteria.andNameLike("%" + name + "%");
         }
-        return mapBlockMapper.selectByExample(mapBlockExample);
+        return mapBlockMapper.selectByExampleWithBLOBs(mapBlockExample);
     }
 }

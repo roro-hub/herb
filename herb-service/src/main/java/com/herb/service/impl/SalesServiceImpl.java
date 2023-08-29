@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SalesServiceImpl implements SalesService {
@@ -71,7 +72,7 @@ public class SalesServiceImpl implements SalesService {
     public Map<String, Map<String, BigDecimal>> recently(List<String> names, Integer month, String type) {
         SalesExample salesExample = new SalesExample();
         SalesExample.Criteria criteria = salesExample.createCriteria()
-                .andTypeEqualTo(type);;
+                .andTypeEqualTo(type);
 
         if (month != null && month > 0) {
             String startDate = DateFormatUtils.format(DateUtils.addMonths(new Date(), -month), "yyyy-MM");
@@ -93,5 +94,20 @@ public class SalesServiceImpl implements SalesService {
             map.put(sales.getRecordMonth(), sales.getQuantity());
         }
         return result;
+    }
+
+    @Override
+    public Set<String> getHerbList(Integer month, String type) {
+        SalesExample salesExample = new SalesExample();
+        SalesExample.Criteria criteria = salesExample.createCriteria()
+                .andTypeEqualTo(type);
+        if (month != null && month > 0) {
+            String startDate = DateFormatUtils.format(DateUtils.addMonths(new Date(), -month), "yyyy-MM");
+            String endDate = DateFormatUtils.format(new Date(), "yyyy-MM");
+            criteria.andRecordMonthGreaterThan(startDate);
+            criteria.andRecordMonthLessThanOrEqualTo(endDate);
+        }
+        List<Sales> salesList = salesMapper.selectByExample(salesExample);
+        return salesList.stream().map(Sales::getName).collect(Collectors.toSet());
     }
 }

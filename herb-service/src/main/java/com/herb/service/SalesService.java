@@ -5,6 +5,7 @@ import com.herb.mbg.model.Sales;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface SalesService {
 
@@ -24,4 +25,6 @@ public interface SalesService {
                      Integer pageNum);
 
     Map<String, Map<String, BigDecimal>> recently(List<String> names, Integer month, String type);
+
+    Set<String> getHerbList(Integer month, String type);
 }

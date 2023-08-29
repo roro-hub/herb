@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by qianhan on 2021-09-19
@@ -66,6 +67,14 @@ public class ProcessingController {
                                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<Processing> list = processingService.list(name, type, herbId, herbName, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(list));
+    }
+
+    @ApiOperation("查询药材名称")
+    @PostMapping("/getHerbList")
+    @ResponseBody
+    public CommonResult<Set<String>> getHerbList(@RequestParam(value = "type") String type) {
+        Set<String> result = processingService.getHerbList(type);
+        return CommonResult.success(result);
     }
 
 }

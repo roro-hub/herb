@@ -2,6 +2,7 @@ package com.herb.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.herb.common.util.PageUtil;
+import com.herb.dao.PriceRankingDao;
 import com.herb.mbg.mapper.PriceRankingMapper;
 import com.herb.mbg.model.PriceRanking;
 import com.herb.mbg.model.PriceRankingExample;
@@ -18,12 +19,16 @@ public class PriceRankingServiceImpl implements PriceRankingService {
 
     @Resource
     private PriceRankingMapper priceRankingMapper;
+    @Resource
+    private PriceRankingDao priceRankingDao;
 
     @Override
-    public List<PriceRanking> today(List<String> names, Integer pageNum, Integer pageSize, String orderBy, String sort) {
+    public List<PriceRanking> latest(List<String> names, Integer pageNum, Integer pageSize, String orderBy, String sort) {
+        Date latestDate = priceRankingDao.getLatestDate();
         PageHelper.startPage(pageNum, pageSize, PageUtil.getOrderBy(orderBy, sort));
         PriceRankingExample example = new PriceRankingExample();
-        PriceRankingExample.Criteria criteria = example.createCriteria().andNewdateEqualTo(new Date());
+        PriceRankingExample.Criteria criteria = example.createCriteria()
+                .andNewdateEqualTo(latestDate);
         if (CollectionUtils.isNotEmpty(names)) {
             criteria.andNameIn(names);
         }

@@ -1,15 +1,19 @@
 package com.herb.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.herb.common.exception.Asserts;
 import com.herb.mbg.mapper.ProcessingMapper;
 import com.herb.mbg.model.Processing;
 import com.herb.mbg.model.ProcessingExample;
 import com.herb.service.ProcessingService;
-import org.apache.commons.lang.StringUtils;
+import io.micrometer.core.instrument.util.StringUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ProcessingServiceImpl implements ProcessingService {
@@ -19,6 +23,19 @@ public class ProcessingServiceImpl implements ProcessingService {
 
     @Override
     public void add(Processing processing) {
+        // 校验药材名称不可重复
+        ProcessingExample processingExample = new ProcessingExample();
+        processingExample.createCriteria()
+                .andTypeEqualTo(processing.getType())
+                .andHerbNameEqualTo(processing.getHerbName());
+        List<Processing> processings = processingMapper.selectByExample(processingExample);
+        if (CollectionUtils.isNotEmpty(processings)) {
+            if ("processing".equals(processing.getType())) {
+                Asserts.fail("药材不可重复录入");
+            } else if ("diet".equals(processing.getType())) {
+                Asserts.fail("药膳不可重复录入");
+            }
+        }
         processingMapper.insert(processing);
     }
 
@@ -55,5 +72,13 @@ public class ProcessingServiceImpl implements ProcessingService {
             criteria.andHerbIdEqualTo(herbId);
         }
         return processingMapper.selectByExample(processingExample);
+    }
+
+    @Override
+    public Set<String> getHerbList(String type) {
+        ProcessingExample processingExample = new ProcessingExample();
+        processingExample.createCriteria().andTypeEqualTo(type);
+        List<Processing> processings = processingMapper.selectByExample(processingExample);
+        return processings.stream().map(Processing::getHerbName).collect(Collectors.toSet());
     }
 }

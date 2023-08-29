@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by qianhan on 2021-09-19
@@ -77,6 +78,15 @@ public class SalesController {
                                                                        @RequestParam(value = "month", required = false) Integer month,
                                                                        @RequestParam(value = "type") String type) {
         Map<String, Map<String, BigDecimal>> result = salesService.recently(names, month, type);
+        return CommonResult.success(result);
+    }
+
+    @ApiOperation("查询近n个月药材名称")
+    @PostMapping("/getHerbList")
+    @ResponseBody
+    public CommonResult<Set<String>> getHerbList(@RequestParam(value = "month", required = false) Integer month,
+                                                 @RequestParam(value = "type") String type) {
+        Set<String> result = salesService.getHerbList(month, type);
         return CommonResult.success(result);
     }
 }

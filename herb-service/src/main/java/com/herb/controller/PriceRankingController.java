@@ -27,14 +27,14 @@ public class PriceRankingController {
     private PriceRankingService priceRankingService;
 
     @ApiOperation("今日价格浮动数据")
-    @PostMapping("/today")
+    @PostMapping("/latest")
     @ResponseBody
-    public CommonResult<CommonPage<PriceRanking>> today(@RequestParam(value = "names", required = false) List<String> names,
-                                                        @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                                        @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
-                                                        @RequestParam(value = "orderBy", defaultValue = "create_time") String orderBy,
-                                                        @RequestParam(value = "sort", defaultValue = "desc") String sort) {
-        List<PriceRanking> list = priceRankingService.today(names, pageNum, pageSize, orderBy, sort);
+    public CommonResult<CommonPage<PriceRanking>> latest(@RequestParam(value = "names", required = false) List<String> names,
+                                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                                         @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                                                         @RequestParam(value = "orderBy", defaultValue = "create_time") String orderBy,
+                                                         @RequestParam(value = "sort", defaultValue = "desc") String sort) {
+        List<PriceRanking> list = priceRankingService.latest(names, pageNum, pageSize, orderBy, sort);
         return CommonResult.success(CommonPage.restPage(list));
     }
 }

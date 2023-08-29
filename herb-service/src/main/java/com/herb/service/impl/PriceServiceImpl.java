@@ -7,6 +7,7 @@ import com.herb.common.api.CommonPage;
 import com.herb.common.util.PageUtil;
 import com.herb.dao.PriceDao;
 import com.herb.dto.PriceDto;
+import com.herb.mbg.mapper.HerbMapper;
 import com.herb.mbg.mapper.PriceMapper;
 import com.herb.mbg.model.Price;
 import com.herb.mbg.model.PriceExample;
@@ -21,11 +22,12 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class PriceServiceImpl implements PriceService {
 
+    @Resource
+    private HerbMapper herbMapper;
     @Resource
     private PriceMapper priceMapper;
     @Resource
@@ -57,13 +59,13 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public PriceChartBO history(Price price) {
+    public PriceChartBO history(String name, String standard, String origin, String site) {
         PriceExample example = new PriceExample();
         example.createCriteria()
-                .andNameEqualTo(price.getName())
-                .andStandardEqualTo(price.getStandard())
-                .andOriginEqualTo(price.getOrigin())
-                .andSiteEqualTo(price.getSite())
+                .andNameEqualTo(name)
+                .andStandardEqualTo(standard)
+                .andOriginEqualTo(origin)
+                .andSiteEqualTo(site)
                 .andNewdateBetween(DateUtils.addYears(new Date(), -1), new Date());
         List<Price> prices = priceMapper.selectByExample(example);
         if (CollectionUtils.isEmpty(prices)) {
@@ -81,36 +83,29 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public Map<String, Map<String, Map<String, BigDecimal>>> recently(List<String> names,
-                                                                      List<String> standards,
-                                                                      String origin,
-                                                                      String site,
-                                                                      Integer month) {
+    public Map<String, Map<String, BigDecimal>> recently(String herbName,
+                                                         String origin,
+                                                         String site,
+                                                         Integer month) {
         Date startDate = null;
         Date endDate = null;
         if (month != null && month > 0) {
             startDate = new java.sql.Date(DateUtils.addMonths(new Date(), -month).getTime());
             endDate = new java.sql.Date(new Date().getTime());
         }
-        List<PriceDto> prices = priceDao.groupByMonth(names,
-                standards,
+        List<PriceDto> prices = priceDao.groupByMonth(herbName,
                 origin,
                 site,
                 startDate,
                 endDate);
-        Map<String, Map<String, Map<String, BigDecimal>>> result = new HashMap<>();
+        Map<String, Map<String, BigDecimal>> result = new HashMap<>();
         prices.forEach(p -> {
-            Map<String, Map<String, BigDecimal>> standardMap = result.get(p.getName());
-            if (MapUtils.isEmpty(standardMap)) {
-                standardMap = new HashMap<>();
-            }
-            Map<String, BigDecimal> dateMap = standardMap.get(p.getStandard());
+            Map<String, BigDecimal> dateMap = result.get(p.getStandard());
             if (MapUtils.isEmpty(dateMap)) {
                 dateMap = new HashMap<>();
             }
             dateMap.put(p.getDate(), p.getNewprice());
-            standardMap.put(p.getStandard(), dateMap);
-            result.put(p.getName(), standardMap);
+            result.put(p.getStandard(), dateMap);
         });
         return result;
     }
@@ -125,8 +120,11 @@ public class PriceServiceImpl implements PriceService {
                 .andOriginEqualTo(origin)
                 .andNewdateEqualTo(latestDate);
         List<Price> prices = priceMapper.selectByExample(example);
-        return prices.stream().collect(Collectors
-                .toMap(Price::getSite, Price::getNewprice, (v1, v2) -> v1));
+        Map<String, BigDecimal> result = new HashMap<>();
+        for (Price price : prices) {
+            result.put(price.getSite(), price.getNewprice());
+        }
+        return result;
     }
 
     @Override

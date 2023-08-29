@@ -54,21 +54,23 @@ public class PriceController {
     @ApiOperation("历史一年内价格浮动数据")
     @PostMapping("/history")
     @ResponseBody
-    public CommonResult<PriceChartBO> history(@RequestBody Price price) {
-        PriceChartBO result = priceService.history(price);
+    public CommonResult<PriceChartBO> history(@RequestParam(value = "name") String name,
+                                              @RequestParam(value = "standard") String standard,
+                                              @RequestParam(value = "origin") String origin,
+                                              @RequestParam(value = "site") String site) {
+        PriceChartBO result = priceService.history(name, standard, origin, site);
         return CommonResult.success(result);
     }
 
     @ApiOperation("最近几个月药材价格数据")
     @PostMapping("/recently")
     @ResponseBody
-    public CommonResult<Map<String, Map<String, Map<String, BigDecimal>>>> recently(
-            @RequestParam(value = "names", required = false) List<String> names,
-            @RequestParam(value = "standards", required = false) List<String> standards,
+    public CommonResult<Map<String, Map<String, BigDecimal>>> recently(
+            @RequestParam(value = "herbName", required = false) String herbName,
             @RequestParam(value = "origin", required = false) String origin,
             @RequestParam(value = "site", required = false) String site,
             @RequestParam(value = "month", required = false) Integer month) {
-        Map<String, Map<String, Map<String, BigDecimal>>> result = priceService.recently(names, standards, origin, site, month);
+        Map<String, Map<String, BigDecimal>> result = priceService.recently(herbName, origin, site, month);
         return CommonResult.success(result);
     }
 
