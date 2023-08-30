@@ -59,7 +59,7 @@ public class MapBlockController {
     @PostMapping("/list")
     @ResponseBody
     public CommonResult<CommonPage<MapBlock>> list(@RequestParam(value = "name", required = false) String name,
-                                                   @RequestParam(value = "type") String type,
+                                                   @RequestParam(value = "type", required = false) String type,
                                                    @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
                                                    @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<MapBlock> list = mapBlockService.list(name, type, pageSize, pageNum);

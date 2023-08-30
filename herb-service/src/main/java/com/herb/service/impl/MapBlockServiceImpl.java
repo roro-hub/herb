@@ -41,7 +41,10 @@ public class MapBlockServiceImpl implements MapBlockService {
     public List<MapBlock> list(String name, String type, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         MapBlockExample mapBlockExample = new MapBlockExample();
-        MapBlockExample.Criteria criteria = mapBlockExample.createCriteria().andTypeEqualTo(type);
+        MapBlockExample.Criteria criteria = mapBlockExample.createCriteria();
+        if (StringUtils.isNotBlank(type)) {
+            criteria.andTypeEqualTo(type);
+        }
         if (StringUtils.isNotBlank(name)) {
             criteria.andNameLike("%" + name + "%");
         }
